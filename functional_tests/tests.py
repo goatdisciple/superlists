@@ -1,8 +1,8 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -14,17 +14,17 @@ class NewVisitorTest(LiveServerTestCase):
     # I don't know why, but this prevents send_keys() from sending crazy
     # nonsense strings on my machine
     def do_send_keys(self, textbox, term):
-        while True:
+        # while True:
             textbox.clear()  # for when we loop and search more than once
             i = 0
             while i < len(term):
                 textbox.send_keys(term[i:i+10])
                 i += 10
-            actual_text = textbox.get_attribute('value')
-            if actual_text == term:
-                break
-            else:
-                pass  # retry because of rare send_keys() problem
+            # actual_text = textbox.get_attribute('value')
+            # if actual_text == term:
+            #     break
+            # else:
+            #     pass  # retry
 
     def check_for_row_in_list_table(self, row_text):
         table = self.browser.find_element_by_id('id_list_table')
