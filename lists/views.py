@@ -10,6 +10,10 @@ def view_list(request, list_id):
     return render(request, 'list.html', {'list': list_})
 
 def new_list(request):
+    if request.POST['item_text'] == '':
+        return render(
+            request, 'home.html', {'error': "You can't have an empty list item"}
+        )
     list_ = List.objects.create()
     Item.objects.create(text=request.POST['item_text'], list=list_)
     return redirect('/lists/%d/' % (list_.id,))
