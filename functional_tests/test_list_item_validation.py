@@ -36,4 +36,4 @@ class ItemValidationTest(FunctionalTest):
             'Make tea\n'
         )
         self.check_for_row_in_list_table('1: Buy milk')
-        self.check_for_row_in_list_table('1: Make tea')
+        self.check_for_row_in_list_table('2: Make tea')
